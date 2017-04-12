@@ -90,3 +90,27 @@ class MyClass:
     @classmethod
     def cmeth(cls):
         print 'This is a class method of', cls
+
+
+##############################################
+#迭代器
+class Fibs:
+    def __init__(self):
+        self.a = 0
+        self.b = 0
+    def next(self):
+        self.a,self.b = self.b,self.a+self.b
+        return self.a
+    def __iter__(self):
+        return self
+
+def flatten(nested):
+    try:#不要迭代类似字符串对象
+        try: nested + ''
+        except TypeError:pass
+        else: raise TypeError
+        for sublist in nested:
+            for element in sublist:
+                yield element
+    except TypeError:
+        yield nested
