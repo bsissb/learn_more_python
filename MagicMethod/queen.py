@@ -5,16 +5,26 @@ def conflict(state, nextX):
             return True
     return False
 
+
 def queens(num=8, state=()):
-    for pos in range(num):
-        if not conflict(state,pos):
-            if len(state) == num-1:
-                yield pos
-            else:
+    if len(state) == num-1:
+        for pos in range(num):
+            if not conflict(state, pos):
+                yield (pos,)
+    else:
+        for pos in range(num):
+            if not conflict(state, pos):
                 for result in queens(num,state+(pos,)):
-                    yield(pos,) + (result,)
+                    yield (pos,) + result
 
 
-print list(queens(3))
-print list(queens(8))
+def prettyprint(solution):
+    def line(pos, length = len(solution)):
+        return '. ' * (pos) + 'X ' + '. ' *(length-pos-1)
+    for pos in solution:
+        print line(pos)
+
+
+import random
+prettyprint(random.choice(list(queens(8))))
 
