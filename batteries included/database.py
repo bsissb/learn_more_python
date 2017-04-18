@@ -17,7 +17,37 @@ def store_person(db):
 
 def lookup_person(db):
     pid = raw_input('Enter ID number')
-    field = raw_input('Shat would you like to know?(name,age,phone')
+    field = raw_input('What would you like to know?(name,age,phone')
     field = field.strip().lower()
     print field.capitalize() + ':', db[pid][field]
 
+def print_help():
+    print 'The availavle commands are:'
+    print 'store: Stores infomation about a person'
+    print 'lookup: Looks up a person from ID number'
+    print 'quit: Save changes and exit'
+    print '?    :Prints this message'
+
+def enter_command():
+    cmd = raw_input('Enter command(? for help):')
+    cmd = cmd.strip().lower()
+    return cmd
+
+def main():
+    database = shelve.open('C:\\database.dat') # ??????
+    try:
+        while True:
+            cmd = enter_command()
+            if cmd == 'store':
+                store_person(database)
+            elif cmd == 'lookup':
+                lookup_person(database)
+            elif cmd == '?':
+                print_help()
+            elif cmd == 'quit'
+                return
+
+    finally:
+        database.close()
+
+if __name__ == '__main__': main()
