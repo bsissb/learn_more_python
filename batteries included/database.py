@@ -44,7 +44,7 @@ def main():
                 lookup_person(database)
             elif cmd == '?':
                 print_help()
-            elif cmd == 'quit'
+            elif cmd == 'quit':
                 return
 
     finally:
